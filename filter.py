@@ -4,7 +4,7 @@ import numpy as np
 import argparse
 
 
-class pixelArtGenerator():
+class PixelArtGenerator:
 
     def __init__(self, gradations= 6, pixel_step = 10):
         self.step = pixel_step
@@ -35,9 +35,10 @@ def create_argparse():
     parser.add_argument("-s", "--size", help="Pixel size", default=10, type=int)
     return parser
 
+
 if __name__ == "__main__":
     parser = create_argparse()
     args = parser.parse_args()
     img = Image.open(args.input)
-    generator = pixelArtGenerator(args.gradation, args.size)
+    generator = PixelArtGenerator(args.gradation, args.size)
     generator.generate(img).save(args.output)
