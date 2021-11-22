@@ -1,7 +1,8 @@
-from pathlib import Path
-from PIL import Image
-import numpy as np
 import argparse
+
+import numpy as np
+from PIL import Image
+from pathlib import Path
 
 
 class PixelArtGenerator:
@@ -65,13 +66,13 @@ class PixelArtGenerator:
         img_array[i: i + self.step, j: j + self.step] = int(s // self.gradation) * self.gradation / 3
         return img_array 
 
-    def generate(self, img):
+    def generate(self, image):
         """
         Creates PixelArt from image
-        :param img: image file
+        :param image: image file
         :return: image file
         """
-        img_array = np.array(img)
+        img_array = np.array(image)
         h, w = len(img_array), len(img_array[1])
         for i in range(0, h, self.step):
             for j in range(0, w, self.step):
@@ -85,12 +86,12 @@ def create_argparse():
     Creates CLI argument parser
     :return: argument parser
     """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-o", "--output", help="Output file name", required=True, type=Path)
-    parser.add_argument("-i", "--input", help="Input file name", required=True, type=Path)
-    parser.add_argument("-g", "--gradation", help="Gradations step", default=6, type=int)
-    parser.add_argument("-s", "--size", help="Pixel size", default=10, type=int)
-    return parser
+    cli_parser = argparse.ArgumentParser()
+    cli_parser.add_argument("-o", "--output", help="Output file name", required=True, type=Path)
+    cli_parser.add_argument("-i", "--input", help="Input file name", required=True, type=Path)
+    cli_parser.add_argument("-g", "--gradation", help="Gradations step", default=6, type=int)
+    cli_parser.add_argument("-s", "--size", help="Pixel size", default=10, type=int)
+    return cli_parser
 
 
 if __name__ == "__main__":
